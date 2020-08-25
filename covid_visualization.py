@@ -32,6 +32,11 @@ for pos_data_line in pos_data_lines[1:]:
 	pos_data_dict['kollam'] = np.append(pos_data_dict['kollam'], pos_data_cell[13]).astype(np.int)
 	pos_data_dict['thiruvananthapuram'] = np.append(pos_data_dict['thiruvananthapuram'], pos_data_cell[14].strip()).astype(np.int)
 
+#data_frame for positive cases
+pos_df = pd.DataFrame(pos_data_dict)
+pos_df.index = date
+#print(pos_df)
+
 #totalling positive cases
 first = True
 for district in pos_data_dict.keys():
@@ -41,11 +46,6 @@ for district in pos_data_dict.keys():
 	else:
 		pos_total += (pos_data_dict[district])
 pos_total.astype(np.int)
-
-#data_frame for positive cases
-pos_df = pd.DataFrame(pos_data_dict)
-pos_df.index = date
-#print(pos_df)
 
 def read_date():
 	search_month = input('\nEnter Month: ').capitalize()[:3]
@@ -182,8 +182,13 @@ while True:
 		plt.ylim(0, yhigh)
 		plt.show()
 
-#	elif plot_selection == '2' :
-#	
+	elif plot_selection == '2' :
+		date_input = read_date()
+		date_result = np.array(pos_df.loc[date_input])
+		print('\nDistrict wise Positive Cases on' + date_input)
+		for i in range(14):
+			print(pos_df.columns[i], ':', date_result[i])
+		print('Total Positive Cases on ' + date_input + ':', date_result.sum(), '\n\n')
 
 	elif plot_selection == '3' :
 		date_input = read_date()
