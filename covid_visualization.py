@@ -13,6 +13,15 @@ pos_data_dict = {'kasaragod': np.array([]), 'kannur': np.array([]), 'wayanad': n
 #date list to store dates to use as indices
 date = np.array([])
 
+#district selectors
+districts = {
+		'tvm' : ['1', 'thiruvananthapuram', 'tvm'], 'klm' : ['2', 'kollam', 'klm'], 'alp' : ['3', 'alappuzha', 'alp'],
+		'pta' : ['4', 'pathanamthitta', 'pta'], 'ktm' : ['5', 'kottayam', 'ktm'], 'idk' : ['6', 'idukki', 'idk'],
+		'ekm' : ['7', 'ernakulam', 'ekm'], 'tsr' : ['8', 'thrissur', 'tsr'], 'pkd' : ['9', 'palakkad', 'pkd'],
+		'mpm' : ['10', 'malappuram', 'mpm'], 'kkd' : ['11', 'kozhikode', 'kkd'], 'wyd' : ['12', 'wayanad', 'wyd'],
+		'knr' : ['13', 'kannur', 'knr'], 'kgd' : ['14', 'kasaragod', 'kgd']
+		}
+
 #read  pos_data to pos_dictionary
 for pos_data_line in pos_data_lines[1:]:
 	pos_data_cell = pos_data_line.split(',')
@@ -61,33 +70,33 @@ def read_district():
 		'\n8.Thrissur\n9.Palakkad\n10.Malappuram\n11.Kozhikode\n12.Wayanad\n13.Kannur\n14.Kasaragod\n\n').lower()
 	district_result = None
 
-	if search_district in ['1', 'thiruvananthapuram', 'tvm']:
+	if search_district in districts['tvm']:
 		district_result = 'thiruvananthapuram'
-	elif search_district in ['2', 'kollam', 'klm']:
+	elif search_district in districts['klm']:
 		district_result = 'kollam'
-	elif search_district in ['3', 'alappuzha', 'alp']:
+	elif search_district in districts['alp']:
 		district_result = 'alappuzha'
-	elif search_district in ['4', 'pathanamthitta', 'pta']:
+	elif search_district in districts['pta']:
 		district_result = 'pathanamthitta'
-	elif search_district in ['5', 'kottayam', 'ktm']:
+	elif search_district in districts['ktm']:
 		district_result = 'kottayam'
-	elif search_district in ['6', 'idukki', 'idk']:
+	elif search_district in districts['idk']:
 		district_result = 'idukki'
-	elif search_district in ['7', 'ernakulam', 'ekm']:
+	elif search_district in districts['ekm']:
 		district_result = 'ernakulam'
-	elif search_district in ['8', 'thrissur', 'tsr']:
+	elif search_district in districts['tsr']:
 		district_result = 'thrissur'
-	elif search_district in ['9', 'palakkad', 'pkd']:
+	elif search_district in districts['pkd']:
 		district_result = 'palakkad'
-	elif search_district in ['10', 'malappuram', 'mpm']:
+	elif search_district in districts['mpm']:
 		district_result = 'malappuram'
-	elif search_district in ['11', 'kozhikode', 'kkd']:
+	elif search_district in districts['kkd']:
 		district_result = 'kozhikode'
-	elif search_district in ['12', 'wayanad', 'wyd']:
+	elif search_district in districts['wyd']:
 		district_result = 'wayanad'
-	elif search_district in ['13', 'kannur', 'knr']:
+	elif search_district in districts['knr']:
 		district_result = 'kannur'
-	elif search_district in ['14', 'kasaragod', 'kgd']:
+	elif search_district in districts['kgd']:
 		district_result = 'kasaragod'
 	return district_result
 
@@ -97,11 +106,7 @@ while True:
 		plot_title = 'Positive COVID 19 Cases'
 		print('\n0.Total')
 		plot_option = read_district()
-		if plot_option in ['0', 'kerala', 'kl', 'all', 'total']:
-			print('Kerala')
-			plt.plot(date, pos_total)
-			max_y = pos_total.max()
-		elif plot_option == 'thiruvananthapuram':
+		if plot_option == 'thiruvananthapuram':
 			print('Thiruvananthapuram')
 			plt.plot(pos_df['thiruvananthapuram'])
 			max_y = pos_df['thiruvananthapuram'].max()
@@ -172,10 +177,11 @@ while True:
 			max_y = pos_df['kasaragod'].max()
 			plot_title += ' in Kasaragod'
 		else:
-			print('Exiting...')
-			exit()
+			print('Kerala')
+			plt.plot(date, pos_total)
+			max_y = pos_total.max()
 
-		yhigh = int(max_y * 1.1)
+		yhigh = int(max_y * 1.1) + 1
 		plt.title(plot_title)
 		plt.xlabel('Days')
 		plt.ylabel('Cases Reported')
@@ -189,12 +195,19 @@ while True:
 		for i in range(14):
 			print(pos_df.columns[i], ':', date_result[i])
 		print('Total Positive Cases on ' + date_input + ':', date_result.sum(), '\n\n')
+		ymax = int(date_result.max() * 1.2)
+		plt.bar(list(districts[district][-1].upper() for district in districts), date_result)
+		plt.title('Positive Cases on ' + date_input)
+		plt.xlabel('Districts')
+		plt.ylabel('Cases Reported')
+		plt.ylim(0, ymax)
+		plt.show()
 
 	elif plot_selection == '3' :
 		date_input = read_date()
 		if date_input == True:
 			continue
-		search_district = read_district()  #input('Enter District: ').lower()
+		search_district = read_district()
 		try:
 			search_result = pos_df[search_district][date_input]
 		except KeyError:
