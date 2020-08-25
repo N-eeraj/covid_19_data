@@ -63,6 +63,16 @@ pos_df = pd.DataFrame(pos_data_dict)
 pos_df.index = date
 #print(pos_df)
 
+def read_date():
+	search_month = input('\nEnter Short Month: ').capitalize()[:3]
+	search_day = input('Enter Date: ')
+	search_date = search_day + '-' + search_month
+	if search_date not in pos_df.index:
+		print('Error Date not found\n')
+		return True
+	else:
+		return search_date
+
 while True:
 	plot_selection = input('1. Date vs Cases\n2. Cases on a specific date\n3. Cases on specific date & district\n')
 	if plot_selection == '1':
@@ -154,20 +164,20 @@ while True:
 		plt.ylim(0, yhigh)
 		plt.show()
 
+#	elif plot_selection == '2' :
+#	
+
 	elif plot_selection == '3' :
-		search_month = input('\nEnter Short Month: ').capitalize()[:3]
-		search_day = input('Enter Date: ')
-		search_date = search_day + '-' + search_month
-		if search_date not in pos_df.index:
-			print('Error Date not found\n')
+		date_input = read_date()
+		if date_input == True:
 			continue
 		search_district = input('Enter District: ').lower()
 		try:
-			search_result = pos_df[search_district][search_date]
+			search_result = pos_df[search_district][date_input]
 		except KeyError:
-			print('Error District not found\n')
+			print('\nError District not found\n')
 			continue
-		print('Cases on ' + search_date + ' in ' + search_district + '\n')
+		print('Cases on ' + date_input + ' in ' + search_district + '\n')
 		print(search_result)
 	else:
 		print('Exiting...')
