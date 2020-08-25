@@ -12,22 +12,6 @@ pos_data_dict = {'kasaragod': np.array([]), 'kannur': np.array([]), 'wayanad': n
 	'kollam': np.array([]), 'thiruvananthapuram': np.array([])}
 #date list to store dates to use as indices
 date = np.array([])
-#district_codes
-tvm = ['1', 'thiruvananthapuram', 'tvm']
-klm = ['2', 'kollam', 'klm']
-alp = ['3', 'alappuzha', 'alp']
-pta = ['4', 'pathanamthitta', 'pta']
-ktm = ['5', 'kottayam', 'ktm']
-idk = ['6', 'idukki', 'idk']
-ekm = ['7', 'ernakulam', 'ekm']
-tsr = ['8', 'thrissur', 'tsr']
-pkd = ['9', 'palakkad', 'pkd']
-mpm = ['10', 'malappuram', 'mpm']
-kkd = ['11', 'kozhikode', 'kkd']
-wyd = ['12', 'wayanad', 'wyd']
-knr = ['13', 'kannur', 'knr']
-kgd = ['14', 'kasaragod', 'kgd']
-total = ['0', 'kerala', 'kl', 'all', 'total']
 
 #read  pos_data to pos_dictionary
 for pos_data_line in pos_data_lines[1:]:
@@ -64,7 +48,7 @@ pos_df.index = date
 #print(pos_df)
 
 def read_date():
-	search_month = input('\nEnter Short Month: ').capitalize()[:3]
+	search_month = input('\nEnter Month: ').capitalize()[:3]
 	search_day = input('Enter Date: ')
 	search_date = search_day + '-' + search_month
 	if search_date not in pos_df.index:
@@ -72,83 +56,133 @@ def read_date():
 		return True
 	else:
 		return search_date
+def read_district():
+	#district_codes
+	tvm = ['1', 'thiruvananthapuram', 'tvm']
+	klm = ['2', 'kollam', 'klm']
+	alp = ['3', 'alappuzha', 'alp']
+	pta = ['4', 'pathanamthitta', 'pta']
+	ktm = ['5', 'kottayam', 'ktm']
+	idk = ['6', 'idukki', 'idk']
+	ekm = ['7', 'ernakulam', 'ekm']
+	tsr = ['8', 'thrissur', 'tsr']
+	pkd = ['9', 'palakkad', 'pkd']
+	mpm = ['10', 'malappuram', 'mpm']
+	kkd = ['11', 'kozhikode', 'kkd']
+	wyd = ['12', 'wayanad', 'wyd']
+	knr = ['13', 'kannur', 'knr']
+	kgd = ['14', 'kasaragod', 'kgd']
+
+	search_district = input('1.Thiruvananthapuram\n2.Kollam\n3.Pathanamthitta\n4.Alappuzha\n5.Kottayam\n6.Idukki\n7.Ernakulam' +
+		'\n8.Thrissur\n9.Palakkad\n10.Malappuram\n11.Kozhikode\n12.Wayanad\n13.Kannur\n14.Kasaragod\n\n').lower()
+	district_result = None
+
+	if search_district in tvm:
+		district_result = 1
+	elif search_district in klm:
+		district_result = 2
+	elif search_district in alp:
+		district_result = 3
+	elif search_district in pta:
+		district_result = 4
+	elif search_district in ktm:
+		district_result = 5
+	elif search_district in idk:
+		district_result = 6
+	elif search_district in ekm:
+		district_result = 7
+	elif search_district in tsr:
+		district_result = 8
+	elif search_district in pkd:
+		district_result = 9
+	elif search_district in mpm:
+		district_result = 10
+	elif search_district in kkd:
+		district_result = 11
+	elif search_district in wyd:
+		district_result = 12
+	elif search_district in knr:
+		district_result = 13
+	elif search_district in kgd:
+		district_result = 14
+	return district_result
 
 while True:
 	plot_selection = input('1. Date vs Cases\n2. Cases on a specific date\n3. Cases on specific date & district\n')
 	if plot_selection == '1':
-		plot_option = input('\nTotal\n1.Thiruvananthapuram\n2.Kollam\n3.Pathanamthitta\n4.Alappuzha\n5.Kottayam\n6.Idukki\n7.Ernakulam' +
-					'\n8.Thrissur\n9.Palakkad\n10.Malappuram\n11.Kozhikode\n12.Wayanad\n13.Kannur\n14.Kasaragod\n\n').lower()
 		plot_title = 'Positive COVID 19 Cases'
-		if plot_option in total:
+		print('\n0.Total')
+		plot_option = read_district()
+		if plot_option in ['0', 'kerala', 'kl', 'all', 'total']:
 			print('Kerala')
 			plt.plot(date, pos_total)
 			max_y = pos_total.max()
-		elif plot_option in tvm:
+		elif plot_option == 1:
 			print('Thiruvananthapuram')
 			plt.plot(pos_df['thiruvananthapuram'])
 			max_y = pos_df['thiruvananthapuram'].max()
 			plot_title += ' in Thiruvananthapuram'
-		elif plot_option in klm:
+		elif plot_option == 2:
 			print('Kollam')
 			plt.plot(pos_df['kollam'])
 			max_y = pos_df['kollam'].max()
 			plot_title += ' in Kollam'
-		elif plot_option in pta:
+		elif plot_option == 3:
 			print('Pathanamthitta')
 			plt.plot(pos_df['pathanamthitta'])
 			max_y = pos_df['pathanamthitta'].max()
 			plot_title += ' in Pathhanamthitta'
-		elif plot_option in alp:
+		elif plot_option == 4:
 			print('Alappuzha')
 			plt.plot(pos_df['alappuzha'])
 			max_y = pos_df['alappuzha'].max()
 			plot_title += ' in Alappuzha'
-		elif plot_option in ktm:
+		elif plot_option == 5:
 			print('Kottayam')
 			plt.plot(pos_df['kottayam'])
 			max_y = pos_df['kottayam'].max()
 			plot_title += ' in Kottayam'
-		elif plot_option in idk:
+		elif plot_option == 6:
 			print('Idukki')
 			plt.plot(pos_df['idukki'])
 			max_y = pos_df['idukki'].max()
 			plot_title += ' in Idukki'
-		elif plot_option in ekm:
+		elif plot_option == 7:
 			print('Ernakulam')
 			plt.plot(pos_df['ernakulam'])
 			max_y = pos_df['ernakulam'].max()
 			plot_title += ' in Ernakulam'
-		elif plot_option in tsr:
+		elif plot_option == 8:
 			print('Thrissur')
 			plt.plot(pos_df['thrissur'])
 			max_y = pos_df['thrissur'].max()
 			plot_title += ' in Thrissur'
-		elif plot_option in pkd:
+		elif plot_option == 9:
 			print('Palakkad')
 			plt.plot(pos_df['palakkad'])
 			max_y = pos_df['palakkad'].max()
 			plot_title += ' in Palakkad'
-		elif plot_option in mpm:
+		elif plot_option == 10:
 			print('Malappuram')
 			plt.plot(pos_df['malappuram'])
 			max_y = pos_df['malappuram'].max()
 			plot_title += ' in Malappuram'
-		elif plot_option in kkd:
+		elif plot_option == 11:
 			print('Kozhikode')
 			plt.plot(pos_df['kozhikode'])
 			max_y = pos_df['kozhikode'].max()
 			plot_title += ' in Kozhikode'
-		elif plot_option in wyd:
+		elif plot_option == 12:
 			print('Wayanad')
 			plt.plot(pos_df['wayanad'])
 			max_y = pos_df['wayanad'].max()
 			plot_title += ' in Wayanad'
-		elif plot_option in knr:
+		elif plot_option == 13:
 			print('Kannur')
 			plt.plot(pos_df['kannur'])
 			max_y = pos_df['kannur'].max()
 			plot_title += ' in Kannur'
-		elif plot_option in kgd:
+		elif plot_option == 14:
 			print('Kasaragod')
 			plt.plot(pos_df['kasaragod'])
 			max_y = pos_df['kasaragod'].max()
