@@ -64,90 +64,111 @@ pos_df.index = date
 #print(pos_df)
 
 while True:
-	plot_option = input('\nTotal\n1.Thiruvananthapuram\n2.Kollam\n3.Pathanamthitta\n4.Alappuzha\n5.Kottayam\n6.Idukki\n7.Ernakulam' +
-				'\n8.Thrissur\n9.Palakkad\n10.Malappuram\n11.Kozhikode\n12.Wayanad\n13.Kannur\n14.Kasaragod\n\n').lower()
-	plot_title = 'Positive COVID 19 Cases'
-	if plot_option in total:
-		print('Kerala')
-		plt.plot(date, pos_total)
-		max_y = pos_total.max()
-	elif plot_option in tvm:
-		print('Thiruvananthapuram')
-		plt.plot(pos_df['thiruvananthapuram'])
-		max_y = pos_df['thiruvananthapuram'].max()
-		plot_title += ' in Thiruvananthapuram'
-	elif plot_option in klm:
-		print('Kollam')
-		plt.plot(pos_df['kollam'])
-		max_y = pos_df['kollam'].max()
-		plot_title += ' in Kollam'
-	elif plot_option in pta:
-		print('Pathanamthitta')
-		plt.plot(pos_df['pathanamthitta'])
-		max_y = pos_df['pathanamthitta'].max()
-		plot_title += ' in Pathhanamthitta'
-	elif plot_option in alp:
-		print('Alappuzha')
-		plt.plot(pos_df['alappuzha'])
-		max_y = pos_df['alappuzha'].max()
-		plot_title += ' in Alappuzha'
-	elif plot_option in ktm:
-		print('Kottayam')
-		plt.plot(pos_df['kottayam'])
-		max_y = pos_df['kottayam'].max()
-		plot_title += ' in Kottayam'
-	elif plot_option in idk:
-		print('Idukki')
-		plt.plot(pos_df['idukki'])
-		max_y = pos_df['idukki'].max()
-		plot_title += ' in Idukki'
-	elif plot_option in ekm:
-		print('Ernakulam')
-		plt.plot(pos_df['ernakulam'])
-		max_y = pos_df['ernakulam'].max()
-		plot_title += ' in Ernakulam'
-	elif plot_option in tsr:
-		print('Thrissur')
-		plt.plot(pos_df['thrissur'])
-		max_y = pos_df['thrissur'].max()
-		plot_title += ' in Thrissur'
-	elif plot_option in pkd:
-		print('Palakkad')
-		plt.plot(pos_df['palakkad'])
-		max_y = pos_df['palakkad'].max()
-		plot_title += ' in Palakkad'
-	elif plot_option in mpm:
-		print('Malappuram')
-		plt.plot(pos_df['malappuram'])
-		max_y = pos_df['malappuram'].max()
-		plot_title += ' in Malappuram'
-	elif plot_option in kkd:
-		print('Kozhikode')
-		plt.plot(pos_df['kozhikode'])
-		max_y = pos_df['kozhikode'].max()
-		plot_title += ' in Kozhikode'
-	elif plot_option in wyd:
-		print('Wayanad')
-		plt.plot(pos_df['wayanad'])
-		max_y = pos_df['wayanad'].max()
-		plot_title += ' in Wayanad'
-	elif plot_option in knr:
-		print('Kannur')
-		plt.plot(pos_df['kannur'])
-		max_y = pos_df['kannur'].max()
-		plot_title += ' in Kannur'
-	elif plot_option in kgd:
-		print('Kasaragod')
-		plt.plot(pos_df['kasaragod'])
-		max_y = pos_df['kasaragod'].max()
-		plot_title += ' in Kasaragod'
+	plot_selection = input('1. Date vs Cases\n2. Cases on a specific date\n3. Cases on specific date & district\n')
+	if plot_selection == '1':
+		plot_option = input('\nTotal\n1.Thiruvananthapuram\n2.Kollam\n3.Pathanamthitta\n4.Alappuzha\n5.Kottayam\n6.Idukki\n7.Ernakulam' +
+					'\n8.Thrissur\n9.Palakkad\n10.Malappuram\n11.Kozhikode\n12.Wayanad\n13.Kannur\n14.Kasaragod\n\n').lower()
+		plot_title = 'Positive COVID 19 Cases'
+		if plot_option in total:
+			print('Kerala')
+			plt.plot(date, pos_total)
+			max_y = pos_total.max()
+		elif plot_option in tvm:
+			print('Thiruvananthapuram')
+			plt.plot(pos_df['thiruvananthapuram'])
+			max_y = pos_df['thiruvananthapuram'].max()
+			plot_title += ' in Thiruvananthapuram'
+		elif plot_option in klm:
+			print('Kollam')
+			plt.plot(pos_df['kollam'])
+			max_y = pos_df['kollam'].max()
+			plot_title += ' in Kollam'
+		elif plot_option in pta:
+			print('Pathanamthitta')
+			plt.plot(pos_df['pathanamthitta'])
+			max_y = pos_df['pathanamthitta'].max()
+			plot_title += ' in Pathhanamthitta'
+		elif plot_option in alp:
+			print('Alappuzha')
+			plt.plot(pos_df['alappuzha'])
+			max_y = pos_df['alappuzha'].max()
+			plot_title += ' in Alappuzha'
+		elif plot_option in ktm:
+			print('Kottayam')
+			plt.plot(pos_df['kottayam'])
+			max_y = pos_df['kottayam'].max()
+			plot_title += ' in Kottayam'
+		elif plot_option in idk:
+			print('Idukki')
+			plt.plot(pos_df['idukki'])
+			max_y = pos_df['idukki'].max()
+			plot_title += ' in Idukki'
+		elif plot_option in ekm:
+			print('Ernakulam')
+			plt.plot(pos_df['ernakulam'])
+			max_y = pos_df['ernakulam'].max()
+			plot_title += ' in Ernakulam'
+		elif plot_option in tsr:
+			print('Thrissur')
+			plt.plot(pos_df['thrissur'])
+			max_y = pos_df['thrissur'].max()
+			plot_title += ' in Thrissur'
+		elif plot_option in pkd:
+			print('Palakkad')
+			plt.plot(pos_df['palakkad'])
+			max_y = pos_df['palakkad'].max()
+			plot_title += ' in Palakkad'
+		elif plot_option in mpm:
+			print('Malappuram')
+			plt.plot(pos_df['malappuram'])
+			max_y = pos_df['malappuram'].max()
+			plot_title += ' in Malappuram'
+		elif plot_option in kkd:
+			print('Kozhikode')
+			plt.plot(pos_df['kozhikode'])
+			max_y = pos_df['kozhikode'].max()
+			plot_title += ' in Kozhikode'
+		elif plot_option in wyd:
+			print('Wayanad')
+			plt.plot(pos_df['wayanad'])
+			max_y = pos_df['wayanad'].max()
+			plot_title += ' in Wayanad'
+		elif plot_option in knr:
+			print('Kannur')
+			plt.plot(pos_df['kannur'])
+			max_y = pos_df['kannur'].max()
+			plot_title += ' in Kannur'
+		elif plot_option in kgd:
+			print('Kasaragod')
+			plt.plot(pos_df['kasaragod'])
+			max_y = pos_df['kasaragod'].max()
+			plot_title += ' in Kasaragod'
+		else:
+			print('Exiting...')
+			exit()
+
+		yhigh = int(max_y * 1.1)
+		plt.title(plot_title)
+		plt.xlabel('Days')
+		plt.ylabel('Cases Reported')
+		plt.ylim(0, yhigh)
+		plt.show()
+
+	elif plot_selection == '3' :
+		search_month = input('\nEnter Short Month: ').capitalize()[:3]
+		search_day = input('Enter Date: ')
+		search_date = search_day + '-' + search_month
+		if search_date not in pos_df.index:
+			print('Error Date not found\n')
+			continue
+		search_district = input('Enter District: ').lower()
+		try:
+			search_result = pos_df[search_district][search_date]
+		except KeyError:
+			print('Error District not found\n')
+			continue
+		print('Cases on ' + search_date + ' in ' + search_district + '\n')
+		print(search_result)
 	else:
 		print('Exiting...')
 		exit()
-
-	yhigh = int(max_y * 1.1)
-	plt.title(plot_title)
-	plt.xlabel('Days')
-	plt.ylabel('Cases Reported')
-	plt.ylim(0, yhigh)
-	plt.show()
