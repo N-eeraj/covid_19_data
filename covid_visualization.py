@@ -196,7 +196,7 @@ while True:
 			print(pos_df.columns[i], ':', date_result[i])
 		print('Total Positive Cases on ' + date_input + ':', date_result.sum(), '\n\n')
 		ymax = int(date_result.max() * 1.2)
-		plt.bar(list(districts[district][-1].upper() for district in districts), date_result)
+		plt.bar(list(districts[district][-1].upper() for district in districts), date_result[::-1])
 		plt.title('Positive Cases on ' + date_input)
 		plt.xlabel('Districts')
 		plt.ylabel('Cases Reported')
