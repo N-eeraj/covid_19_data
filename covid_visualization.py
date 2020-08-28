@@ -3,9 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from termcolor import colored
 
-#dataframe creation
+#dataframe creation from csv files
 pos_df = pd.read_csv('positive.csv')
 death_df = pd.read_csv('death.csv')
+recover_df = pd.read_csv('recovery.csv')
 
 #district selectors
 districts = {
@@ -69,7 +70,7 @@ def read_district():
 
 while True:
 	try:
-		case_type = read_msg('\n1.Positive Cases\n2.Death Tolls\nPress "X" to exit\n\n')
+		case_type = read_msg('\n1.Positive Cases\n2.Death Tolls\n3.Recoved Cases\nPress "X" to exit\n\n')
 	except KeyboardInterrupt:
 		fn_exit() #exit on Ctrl+C
 
@@ -78,7 +79,7 @@ while True:
 		df = pos_df[pos_df.columns[1:]] #excluding date column from the dataframe
 		df.index = np.array(pos_df['Date']) #setting date column as index
 		plot_title = 'COVID Positive Cases '
-		clr_code = '#05A'
+		clr_code = '#03F'
 
 	elif case_type in ['2', 'death', 'dead']:
 		print('Accessing COVID Death Data\n')
@@ -86,6 +87,13 @@ while True:
 		df.index = np.array(death_df['Date']) #setting date column as index
 		plot_title = 'COVID Death Reports '
 		clr_code = '#A00'
+
+	elif case_type in ['3', 'recovery', 'recovered']:
+		print('Accessing COVID Recovery Data\n')
+		df = recover_df[pos_df.columns[1:]] #excluding date column from the dataframe
+		df.index = np.array(recover_df['Date']) #setting date column as index
+		plot_title = 'COVID Positive Cases '
+		clr_code = '#070'
 
 	elif case_type in ['x', 'exit', 'quit']:
 		fn_exit()
