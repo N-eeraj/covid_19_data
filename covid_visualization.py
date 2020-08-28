@@ -8,6 +8,11 @@ pos_df = pd.read_csv('positive.csv')
 death_df = pd.read_csv('death.csv')
 recover_df = pd.read_csv('recovery.csv')
 
+## Work Here - Error : Addition Error 'Date'
+#active_df = pos_df[1:] - (recover_df[1:] + death_df[1:]) #calculating active cases
+#print(active_df)
+#exit()
+
 #district selectors
 districts = {
 		'kgd' : ['14', 'kasaragod', 'kgd'], 'knr' : ['13', 'kannur', 'knr'], 'wyd' : ['12', 'wayanad', 'wyd'],
