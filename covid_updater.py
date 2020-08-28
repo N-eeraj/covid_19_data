@@ -18,7 +18,8 @@ def read_data(prompt, file):
 	print('\nTotal:'+ str(total))
 	new_line = date + (','.join(data))
 	with open(file, 'a') as data_file:
-		data_file.write(new_line + '\n')
+		data_file.write('\n' + new_line)
 
 read_data('Enter the positive cases in ', 'positive.csv')
 read_data('Enter the death cases in ', 'death.csv')
+read_data('Enter the recovery cases in ', 'recovery.csv')
