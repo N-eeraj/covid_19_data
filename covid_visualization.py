@@ -3,15 +3,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from termcolor import colored
 
+###	Data is obtained from https://dashboard.kerala.gov.in
+
 #dataframe creation from csv files
 pos_df = pd.read_csv('positive.csv')
 death_df = pd.read_csv('death.csv')
 recover_df = pd.read_csv('recovery.csv')
 
-## Work Here - Error : Addition Error 'Date'
-#active_df = pos_df[1:] - (recover_df[1:] + death_df[1:]) #calculating active cases
-#print(active_df)
-#exit()
+###	Active cases data may be different due to another reason for death, migration etc.
+
+active_df = pos_df[pos_df.columns[1:]] - (recover_df[recover_df.columns[1:]] + death_df[death_df.columns[1:]]) #calculating new cummilative cases
+for i in range(1,len(active_df)):
+	active_df.loc[i] = active_df.loc[i] + active_df.loc[i - 1] #cummilating active cases
 
 #district selectors
 districts = {
@@ -75,7 +78,7 @@ def read_district():
 
 while True:
 	try:
-		case_type = read_msg('\n1.Positive Cases\n2.Death Tolls\n3.Recoved Cases\nPress "X" to exit\n\n')
+		case_type = read_msg('\n1.Positive Cases\n2.Death Tolls\n3.Recoved Cases\n4.Active Cases\nPress "X" to exit\n\n')
 	except KeyboardInterrupt:
 		fn_exit() #exit on Ctrl+C
 
@@ -99,6 +102,13 @@ while True:
 		df.index = np.array(recover_df['Date']) #setting date column as index
 		plot_title = 'COVID Recovered Cases '
 		clr_code = '#070'
+
+	elif case_type in ['4', 'active', 'ongoing']:
+		print('Accessing Active COVID Data\n')
+		df = active_df
+		df.index = np.array(pos_df['Date']) #setting date column as index
+		plot_title = 'COVID Active Cases '
+		clr_code = '#AA0'
 
 	elif case_type in ['x', 'exit', 'quit']:
 		fn_exit()
