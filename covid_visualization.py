@@ -118,8 +118,8 @@ while True:
 
 	#confirming date in dataframe
 	def read_date():
-		search_month = input('\nEnter Month: ').capitalize()[:3]
-		search_day = input('Enter Date: ')
+		search_month = read_msg('\nEnter Month: ').capitalize()[:3]
+		search_day = read_msg('Enter Date: ')
 		search_date = search_day + '-' + search_month
 		if search_date not in df.index:
 			print_error('Date not found\n')
@@ -144,7 +144,7 @@ while True:
 				continue
 			plt.plot(df[df.columns].sum(axis = 1), clr_code) #totaling the district counts
 			plt.title(plot_title + 'Kerala')
-		plt.xlabel('No.of Days')
+		plt.xlabel('No. of Days')
 		plt.ylabel('Cases Reported')
 		plt.show()
 
@@ -153,8 +153,10 @@ while True:
 		if date != True:
 			plt.bar(list(districts[district][-1].upper() for district in districts), df.loc[date], color = clr_code)
 			plt.xticks(rotation = 15)
+			plt.title(plot_title + ' on ' + date)
+			plt.xlabel('Districts')
+			plt.ylabel('Cases Reported')
 			plt.show()
-		## Work Here
 
 	elif search_type in ['3', 'search', 'date&case', 'date and case']:
 		district = read_district()
