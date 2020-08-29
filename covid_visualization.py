@@ -97,7 +97,7 @@ while True:
 		print('Accessing COVID Recovery Data\n')
 		df = recover_df[pos_df.columns[1:]] #excluding date column from the dataframe
 		df.index = np.array(recover_df['Date']) #setting date column as index
-		plot_title = 'COVID Positive Cases '
+		plot_title = 'COVID Recovered Cases '
 		clr_code = '#070'
 
 	elif case_type in ['x', 'exit', 'quit']:
