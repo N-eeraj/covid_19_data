@@ -5,7 +5,7 @@ districts = ['Kasaragod', 'Kannur', 'Wayanad', 'Kozhikode', 'Malappuram', 'Palak
 		'Kottayam', 'Pathanamthitta', 'Alapuzha', 'Kollam', 'Thiruvananthapuram']
 
 day = input('Enter Day : ')
-month = input('Enter Month : ').capitalize()
+month = input('Enter Month : ').capitalize()[:3]
 date = month + '-' + day
 print('Date: '+ date)
 
