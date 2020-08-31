@@ -3,7 +3,10 @@ import numpy as np
 
 districts = ['Kasaragod', 'Kannur', 'Wayanad', 'Kozhikode', 'Malappuram', 'Palakkad', 'Thrissur', 'Ernakulam', 'Idukki',
 		'Kottayam', 'Pathanamthitta', 'Alapuzha', 'Kollam', 'Thiruvananthapuram']
-date = datetime.date.today().strftime('%d-%b,')
+
+day = input('Enter Day : ')
+month = input('Enter Month : ').capitalize()
+date = month + '-' + day
 print('Date: '+ date)
 
 def read_data(prompt, file):
