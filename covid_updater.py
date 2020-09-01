@@ -6,7 +6,7 @@ districts = ['Kasaragod', 'Kannur', 'Wayanad', 'Kozhikode', 'Malappuram', 'Palak
 #reading date
 day = input('Enter Day : ')
 month = input('Enter Month : ')[:3].capitalize()
-date = month + '-' + day
+date = day + '-' + month
 print('Date: '+ date)
 
 def read_data(prompt, file):
