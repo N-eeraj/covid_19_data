@@ -13,17 +13,18 @@ pos_list = [date]
 recovery_list = [date]
 death_list = [date]
 
+def fn_save(file, data_list):
+	with open(file, 'a') as data_file:
+		data_file.write('\n' + ','.join(data_list))
+
 for district in districts:
 	pos_list.append(input('\nEnter the positive cases in ' + district + ' : '))
 	recovery_list.append(input('Enter the recovered cases in ' + district + ' : '))
 	death_list.append(input('Enter the death cases in ' + district + ' : '))
 
-with open('positive.csv', 'a') as pos_file:
-	pos_file.write('\n' + ','.join(pos_list))
-with open('recovery.csv', 'a') as recovery_file:
-	recovery_file.write('\n' + ','.join(recovery_list))
-with open('death.csv', 'a') as death_file:
-	death_file.write('\n' + ','.join(death_list))
+fn_save('positive.csv', pos_list)
+fn_save('recovery.csv', recovery_list)
+fn_save('death.csv', death_list)
 
 #def read_data(prompt, file):
 #	data = []
