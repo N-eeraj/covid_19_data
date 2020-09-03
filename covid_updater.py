@@ -14,13 +14,16 @@ recovery_list = [date]
 death_list = [date]
 
 for district in districts:
-	pos_list.append(input('Enter the positive cases in ' + district))
-	recovery_list.append(input('Enter the recovered cases in ' + district))
-	death_list.append(input('Enter the death cases in ' + district))
+	pos_list.append(input('\nEnter the positive cases in ' + district + ' : '))
+	recovery_list.append(input('Enter the recovered cases in ' + district + ' : '))
+	death_list.append(input('Enter the death cases in ' + district + ' : '))
 
-print(pos_list)
-print(recovery_list)
-print(death_list)
+with open('positive.csv', 'a') as pos_file:
+	pos_file.write('\n' + ','.join(pos_list))
+with open('recovery.csv', 'a') as recovery_file:
+	recovery_file.write('\n' + ','.join(recovery_list))
+with open('death.csv', 'a') as death_file:
+	death_file.write('\n' + ','.join(death_list))
 
 #def read_data(prompt, file):
 #	data = []
