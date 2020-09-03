@@ -23,6 +23,7 @@ for district in districts:
 	death_list.append(input('Enter the death cases in ' + district + ' : '))
 
 for files in [('positive.csv', pos_list), ('recovery.csv', recovery_list), ('death.csv', death_list)]:
+	print('\n' + files[0][:-4].capitalize(), 'Cases:' , np.array(files[1][1:], dtype = int).sum())
 	fn_save(files[0], files[1])
 
 #def read_data(prompt, file):
