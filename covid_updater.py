@@ -22,9 +22,8 @@ for district in districts:
 	recovery_list.append(input('Enter the recovered cases in ' + district + ' : '))
 	death_list.append(input('Enter the death cases in ' + district + ' : '))
 
-fn_save('positive.csv', pos_list)
-fn_save('recovery.csv', recovery_list)
-fn_save('death.csv', death_list)
+for files in [('positive.csv', pos_list), ('recovery.csv', recovery_list), ('death.csv', death_list)]:
+	fn_save(files[0], files[1])
 
 #def read_data(prompt, file):
 #	data = []
