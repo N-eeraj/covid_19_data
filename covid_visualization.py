@@ -25,6 +25,9 @@ districts = {
 		'klm' : ['2', 'kollam', 'klm'], 'tvm' : ['1', 'thiruvananthapuram', 'tvm']
                 }
 
+#index as date
+indices = np.array(pos_df['Date'])
+
 #function to make imput prompt white
 def read_msg(prompt):
 	input_read = input(colored(prompt, 'white')).lower()
@@ -37,6 +40,11 @@ def print_error(error_msg):
 def fn_exit():
 	print('\nExiting...\n')
 	exit()
+
+#function to set date as index
+def fn_index(df):
+	df.index = indices
+	return df
 
 #reading districts
 def read_district():
@@ -85,28 +93,28 @@ while True:
 	if case_type in ['1', 'positive', 'pos']:
 		print('Accessing COVID Positive Data\n')
 		df = pos_df[pos_df.columns[1:]] #excluding date column from the dataframe
-		df.index = np.array(pos_df['Date']) #setting date column as index
+		fn_index(df) #setting date column as index
 		plot_title = 'COVID Positive Cases '
 		clr_code = '#03F'
 
 	elif case_type in ['2', 'death', 'dead']:
 		print('Accessing COVID Death Data\n')
 		df = death_df[death_df.columns[1:]] #excluding date column from the dataframe
-		df.index = np.array(death_df['Date']) #setting date column as index
+		fn_index(df) #setting date column as index
 		plot_title = 'COVID Death Reports '
 		clr_code = '#A00'
 
 	elif case_type in ['3', 'recovery', 'recovered']:
 		print('Accessing COVID Recovery Data\n')
-		df = recover_df[pos_df.columns[1:]] #excluding date column from the dataframe
-		df.index = np.array(recover_df['Date']) #setting date column as index
+		df = recover_df[recover_df.columns[1:]] #excluding date column from the dataframe
+		fn_index(df) #setting date column as index
 		plot_title = 'COVID Recovered Cases '
 		clr_code = '#070'
 
 	elif case_type in ['4', 'active', 'ongoing']:
 		print('Accessing Active COVID Data\n')
 		df = active_df
-		df.index = np.array(pos_df['Date']) #setting date column as index
+		fn_index(df) #setting date column as index
 		plot_title = 'COVID Active Cases '
 		clr_code = '#AA0'
 
