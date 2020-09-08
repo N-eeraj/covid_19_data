@@ -11,9 +11,8 @@ death_df = pd.read_csv('death.csv')
 recover_df = pd.read_csv('recovery.csv')
 
 ###	Active cases data may be different due to another reason for death, migration etc.
-
 active_df = pos_df[pos_df.columns[1:]] - (recover_df[recover_df.columns[1:]] + death_df[death_df.columns[1:]]) #calculating new cummilative cases
-for i in range(1,len(active_df)):
+for i in range(1, len(active_df)):
 	active_df.loc[i] = active_df.loc[i] + active_df.loc[i - 1] #cummilating active cases
 
 #district selectors
@@ -136,7 +135,7 @@ while True:
 			return search_date
 
 	try:
-		search_type = read_msg('\n1.Date vs Case\n2.Date Results\n3.Date & Case Based Search\nPress "Z" to go back\nPress "X" to exit\n\n')
+		search_type = read_msg('\n1.Date vs Case\n2.Date Results\n3.Date & Case Based Search\n4.Comparison\nPress "Z" to go back\nPress "X" to exit\n\n')
 	except KeyboardInterrupt:
 		fn_exit() #exit on Ctrl+C
 
@@ -177,6 +176,24 @@ while True:
 				print_error('District Not Found')
 				continue
 			print(df[df.columns].sum(axis = 1)[date]) #totaling the district counts & finding date
+
+	elif search_type in ['4', 'compare']:
+		plt.plot(df.Thiruvananthapuram, label = 'TVM')
+		plt.plot(df.Kollam ,label = 'KLM')
+		plt.plot(df.Alappuzha, label = 'ALP')
+		plt.plot(df.Pathanamthitta, label = 'PTA')
+		plt.plot(df.Kottayam, label = 'KTM')
+		plt.plot(df.Idukki, label = 'IDK')
+		plt.plot(df.Ernakulam, label = 'EKM')
+		plt.plot(df.Thrissur, label = 'TSR')
+		plt.plot(df.Palakkad, label = 'PKD')
+		plt.plot(df.Malappuram, label = 'MPM')
+		plt.plot(df.Kozhikode, label = 'KKD')
+		plt.plot(df.Wayanad, label = 'WYD')
+		plt.plot(df.Kannur, label = 'KNR')
+		plt.plot(df.Kasaragod, label = 'KGD')
+		plt.legend()
+		plt.show()
 
 	elif search_type in ['z', 'back', 'go back', 'goback']:
 		continue
