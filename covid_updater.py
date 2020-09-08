@@ -15,7 +15,7 @@ def fn_save(file, data_list): #function to update a file
 
 while True:
 
-	exit = True
+	Exit = True
 	pos_list = [date]
 	rec_list = [date]
 	dead_list = [date]
@@ -29,9 +29,9 @@ while True:
 		print('\n' + files[0][:-4].capitalize(), 'Cases:' , np.array(files[1][1:], dtype = int).sum()) #calculate sums
 		if input('Confirm Total ' +  files[0][:-4] + ' Cases (y/n)').lower() != 'y':
 			print('Check the numbers & try again')
-			exit = False
+			Exit = False
 			break
 		fn_save(files[0], files[1]) #updating a file
 
-	if exit == True:
+	if Exit == True:
 		exit() #exit on updating
