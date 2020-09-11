@@ -15,7 +15,6 @@ def fn_save(file, data_list): #function to update a file
 
 while True:
 
-	Exit = True
 	pos_list = [date]
 	rec_list = [date]
 	dead_list = [date]
@@ -25,13 +24,17 @@ while True:
 		rec_list.append(input('Enter the recovered cases in ' + district + ' : ')) #reading recovery cases
 		dead_list.append(input('Enter the death cases in ' + district + ' : ')) #reading death cases
 
-	for files in [('positive.csv', pos_list), ('recovery.csv', rec_list), ('death.csv', dead_list)]:
-		print('\n' + files[0][:-4].capitalize(), 'Cases:' , np.array(files[1][1:], dtype = int).sum()) #calculate sums
-		if input('Confirm Total ' +  files[0][:-4] + ' Cases (y/n)').lower() != 'y':
-			print('Check the numbers & try again')
-			Exit = False
-			break
-		fn_save(files[0], files[1]) #updating a file
+	print('\nPositive Cases:', np.array(pos_list[1:], dtype = int).sum())
+	print('Recovered Cases:', np.array(rec_list[1:], dtype = int).sum())
+	print('Death Cases:', np.array(dead_list[1:], dtype = int).sum())
 
-	if Exit == True:
-		exit() #exit on updating
+	if input('\nSave ?').lower() == 'y':
+		for files in [('positive.csv', pos_list), ('recovery.csv', rec_list), ('death.csv', dead_list)]:
+			fn_save(files[0], files[1]) #updating a file
+		print('\nSaved\n')
+		break
+	else:
+		if input('\nTry Again ?').lower() == 'y':
+			continue
+		else:
+			break
