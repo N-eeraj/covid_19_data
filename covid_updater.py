@@ -22,7 +22,10 @@ while True:
 	for district in districts:
 		pos_list.append(input('\nEnter the positive cases in ' + district + ' : ')) #reading positive cases
 		rec_list.append(input('Enter the recovered cases in ' + district + ' : ')) #reading recovery cases
-		dead_list.append(input('Enter the death cases in ' + district + ' : ')) #reading death cases
+		deaths = input('Enter the death cases in ' + district + ' : ')
+		if deaths == '':
+			deaths = '0'
+		dead_list.append(deaths) #reading death cases
 
 	print('\nPositive Cases:', np.array(pos_list[1:], dtype = int).sum())
 	print('Recovered Cases:', np.array(rec_list[1:], dtype = int).sum())
