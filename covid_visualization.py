@@ -9,9 +9,9 @@ dth_df = pd.read_csv('death.csv', index_col = 0)
 rec_df = pd.read_csv('recovery.csv', index_col = 0)
 
 ### computing total cases of each day
-pos_df['Total'] = pos_df[pos_df.columns].sum(axis = 1)
-dth_df['Total'] = dth_df[dth_df.columns].sum(axis = 1)
-rec_df['Total'] = rec_df[rec_df.columns].sum(axis = 1)
+pos_df['Total'] = pos_df.sum(axis = 1)
+dth_df['Total'] = dth_df.sum(axis = 1)
+rec_df['Total'] = rec_df.sum(axis = 1)
 
 #computing active cases
 act_df = pos_df - (rec_df + dth_df)
