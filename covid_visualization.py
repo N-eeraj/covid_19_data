@@ -113,11 +113,15 @@ while True:
 		print('Accessing COVID Datas\n')
 		plot_title = 'COVID Cases in '
 		district = read_district()
-		plot_title += district
-		plt.plot(pos_df[district], '#03F')
-		plt.plot(dth_df[district], '#A00')
-		plt.plot(rec_df[district], '#070')
+		plt.plot(pos_df[district], '#03F', label = 'Positive Cases')
+		plt.plot(dth_df[district], '#A00', label = 'Death Cases')
+		plt.plot(rec_df[district], '#070', label = 'Recovered Cases')
+		plt.title(plot_title + district)
+		plt.xlabel('Days')
+		plt.ylabel('Cases')
+		plt.legend()
 		plt.show()
+		continue
 
 	elif case_type in ['x', 'exit', 'quit']:
 		fn_exit()
@@ -154,7 +158,7 @@ while True:
 				continue
 			plt.plot(df[district], clr_code)
 			plt.title(plot_title + 'Kerala')
-		plt.xlabel('No. of Days')
+		plt.xlabel('Days')
 		plt.ylabel('Cases Reported')
 		plt.show()
 
