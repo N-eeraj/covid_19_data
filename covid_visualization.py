@@ -116,6 +116,7 @@ while True:
 		plt.plot(pos_df[district], '#03F', label = 'Positive Cases')
 		plt.plot(dth_df[district], '#A00', label = 'Death Cases')
 		plt.plot(rec_df[district], '#070', label = 'Recovered Cases')
+		plt.style.use('seaborn-darkgrid')
 		plt.title(plot_title + district)
 		plt.xlabel('Days')
 		plt.ylabel('Cases')
