@@ -81,7 +81,7 @@ def read_district():
 while True:
 	### reading what dataframe to access
 	try:
-		case_type = read_msg('\n1.Positive Cases\n2.Death Tolls\n3.Recoved Cases\n4.Active Cases\nPress "X" to exit\n\n')
+		case_type = read_msg('\n1.Positive Cases\n2.Death Tolls\n3.Recoved Cases\n4.Active Cases\n5.Summary\nPress "X" to exit\n\n')
 	except KeyboardInterrupt:
 		fn_exit() #exit on Ctrl+C
 
@@ -108,6 +108,16 @@ while True:
 		df = act_df
 		plot_title = 'COVID Active Cases '
 		clr_code = '#AA0'
+
+	elif case_type in ['5', 'summary']:
+		print('Accessing COVID Datas\n')
+		plot_title = 'COVID Cases in '
+		district = read_district()
+		plot_title += district
+		plt.plot(pos_df[district], '#03F')
+		plt.plot(dth_df[district], '#A00')
+		plt.plot(rec_df[district], '#070')
+		plt.show()
 
 	elif case_type in ['x', 'exit', 'quit']:
 		fn_exit()
